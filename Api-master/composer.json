@@ -34,7 +34,13 @@
     "autoload": {
         "psr-4": {
             "TelegramBot\\Api\\": "src"
-        }
+        },
+        "files": [
+            "../MenuMessages.php",
+            "../MessagesWeather.php",
+            "../CityCoords.php",
+            "../UpdatesForDb.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

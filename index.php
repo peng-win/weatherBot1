@@ -1,28 +1,30 @@
 <?php
 
+namespace weatherBot;
+
+require_once __DIR__."/vendor/autoload.php";
 //ссылка на бота https://t.me/irych_test_weather_bot
 //токен бота 6033179284:AAE351yAizdTZMnEAa21q9aAzc344hDesW4;
 //$chat_id = 769820969;
 //$urlQuery = "https://api.telegram.org/bot". $token ."/sendMessage?chat_id=". $chat_id ."&text=" . $textMessage;
-
-include("MenuMessages.php");
-include("MessagesWeather.php");
-include("UpdatesForDb.php");
-include("CityCoords.php");
+use SQLite3;
+include ("UpdatesForDb.php");
+include ("MenuMessages.php");
+include ("MessagesWeather.php");
 
 header('Content-Type: text/html; charset=utf-8');
 
-$site_dir = dirname('https://junior.testmoydom.ru', 2) .'/'; // корень сайта
+$site_dir = dirname('https://junior.testmoydom.ru', 2) . 'index.php/'; // корень сайта
 $bot_token = '6033179284:AAE351yAizdTZMnEAa21q9aAzc344hDesW4'; // токен бота
 $data = file_get_contents('php://input');
 $data = json_decode($data, true);
 $db = new SQLite3("weather.db");
 
-
 $request = new UpdatesForDb($db);
 $message_weather = new MessagesWeather($bot_token);
 $message_menu = new MenuMessages($bot_token);
-$find_city_coord = new CityCoords($bot_token);
+
+//$find_city_coord = new CityCoords($bot_token);
 //if(!empty($data['callback_query']['data']))
 //{
 //   // $find_city_coord->find_coord($bot_token, $data['callback_query']['from']['id'], trim($data['callback_query']['data']));
@@ -37,6 +39,8 @@ if (!empty($data['message']['text'])) {
     $text = trim($data['message']['text']);
     $callback_query = $data['callback_query']['data'];
     $callback_data = $callback_query['data'];
+
+
     $get_user = $request->get_user_dialog_table($db, $chat_id);
 
     if (empty($get_user)) {
@@ -79,6 +83,3 @@ if (!empty($data['message']['text'])) {
 
     }
 }
-
-
-

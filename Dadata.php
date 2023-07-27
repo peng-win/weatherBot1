@@ -1,5 +1,10 @@
 <?php
 
+namespace weatherBot;
+
+
+use TelegramBot\Api\Exception;
+
 class Dadata
 {
     private $clean_url = "https://cleaner.dadata.ru/api/v1/clean";

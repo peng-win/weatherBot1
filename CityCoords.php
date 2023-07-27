@@ -1,11 +1,14 @@
 <?php
 
+namespace weatherBot;
+
 class CityCoords
 {
     public $bot_token;
+
     public function __construct($bot_token)
     {
-        $this->bot_token =$bot_token;
+        $this->bot_token = $bot_token;
     }
 
     public function find_city($bot_token, $chat_id, $city)
@@ -13,28 +16,26 @@ class CityCoords
         $message_menu = new MenuMessages($bot_token);
         $key = "YfNxSmoYSDqi";
         $url = "https://api.geotree.ru/search.php?key=$key&term=$city&level=4";
-        $data=@file_get_contents($url);
+        $data = @file_get_contents($url);
 
 
         $array[] = "";
         $text_return = "";
-        if($data)
-        {
+        if ($data) {
             $findcity = json_decode($data, true);
 
-            $k=0;
-            $text_return = "Выберите населенный пункт: "."\n";
-            foreach ($findcity as $r)
-            {
-                    $address = $city." ".$r['parents']['level_1']['name_source']."\n";
-                    //$text_return.= $address;
+            $k = 0;
+            $text_return = "Выберите населенный пункт: " . "\n";
+            foreach ($findcity as $r) {
+                $address = $city . " " . $r['parents']['level_1']['name_source'] . "\n";
+                //$text_return.= $address;
 
-                    $lat = $r['geo_center']['lat'];
-                    $lon = $r['geo_center']['lon'];
-                    $coords = "lat=".$lat."&lon=".$lon;
-                    $array[$k] = [['text' => $address, 'callback_data'=>$coords]];
+                $lat = $r['geo_center']['lat'];
+                $lon = $r['geo_center']['lon'];
+                $coords = "lat=" . $lat . "&lon=" . $lon;
+                $array[$k] = [['text' => $address, 'callback_data' => $coords]];
 
-                    $k++;
+                $k++;
             }
 
             $reply_markup = json_encode([
@@ -42,9 +43,7 @@ class CityCoords
                     $array,
             ]);
 
-        }
-        else
-        {
+        } else {
             $text_return = 'Некорректный ввод названия населенного пункта. Повторите попытку';
         }
 
@@ -59,16 +58,13 @@ class CityCoords
         $text_return = "";
         $data = @file_get_contents($url);
 
-        if($data)
-        {
+        if ($data) {
             $coords = json_decode($data, true);
 
 //                $text_return .= $coords['geo_center']['lon']."\n";
 //                $text_return .= $coords['geo_center']['lat']."\n";
             $text_return = "ddd";
-        }
-        else
-        {
+        } else {
             $text_return = 'Некорректный ввод названия населенного пункта. Повторите попытку';
         }
 

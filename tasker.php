@@ -1,13 +1,17 @@
 <?php
 
-//mail('support@testmoydom.ru', 'Test', 'Проверка CRON');
-include("MenuMessages.php");
+namespace weatherBot;
+
+use SQLite3;
+
+include ("UpdatesForDb.php");
+include ("MenuMessages.php");
 include ("MessagesWeather.php");
-include("UpdatesForDb.php");
+
 
 header('Content-Type: text/html; charset=utf-8');
 
-$site_dir = dirname('https://junior.testmoydom.ru', 2) .'/'; // корень сайта
+$site_dir = dirname('https://junior.testmoydom.ru', 2) . 'tasker.php/'; // корень сайта
 $bot_token = '6033179284:AAE351yAizdTZMnEAa21q9aAzc344hDesW4'; // токен бота
 $data = file_get_contents('php://input');
 $data = json_decode($data, true);

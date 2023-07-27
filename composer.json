@@ -1,0 +1,19 @@
+{
+  "name": "peng_win/weatherbot",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "peng_win",
+      "email": "email@example.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "weatherBot\\": "app"
+    }
+  },
+  "require": {
+  }
+}

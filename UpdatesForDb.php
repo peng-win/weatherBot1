@@ -1,20 +1,28 @@
 <?php
 
 //запросы для добавления данных в базу
+
+namespace weatherBot;
+
+
+use Exception;
+
 class UpdatesForDb
 {
     public $db;
+
     public function __construct($db)
     {
-        $this->db =$db;
+        $this->db = $db;
     }
+
     public function add_new_user($db, $chat_id, $bot_state): void
     {
         //добавляем нового пользователя
         try {
             $db->exec("insert into userDialog (userId, botState) values ('$chat_id', '$bot_state')");
         } catch (Exception $e) {
-            echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+            echo 'Выброшено исключение: ', $e->getMessage(), "\n";
         }
     }
 
@@ -24,7 +32,7 @@ class UpdatesForDb
         try {
             $db->exec("insert into weatherForUser (userId, userCity, userWeatherTemp) values ('$chat_id', '$city', '$temperature')");
         } catch (Exception $e) {
-            echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+            echo 'Выброшено исключение: ', $e->getMessage(), "\n";
         }
     }
 
@@ -72,13 +80,13 @@ class UpdatesForDb
 
 //запросы для обновления базы данных
 
-    public function update_user_city($db, $chat_id,$city, $temperature): void
+    public function update_user_city($db, $chat_id, $city, $temperature): void
     {
         //обновляем данные о населенном пункте
         try {
             $db->exec("update weatherForUser set userCity='$city', userWeatherTemp='$temperature' where userId='$chat_id'");
         } catch (Exception $e) {
-            echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+            echo 'Выброшено исключение: ', $e->getMessage(), "\n";
         }
     }
 
@@ -88,7 +96,7 @@ class UpdatesForDb
         try {
             $db->exec("update userDialog set botState = '$bot_state' where userId='$chat_id'");
         } catch (Exception $e) {
-            echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+            echo 'Выброшено исключение: ', $e->getMessage(), "\n";
         }
     }
 }

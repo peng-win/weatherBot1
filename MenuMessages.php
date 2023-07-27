@@ -1,18 +1,22 @@
 <?php
 
+namespace weatherBot;
+
 class MenuMessages
 {
     public $bot_token;
+
     public function __construct($bot_token)
     {
-        $this->bot_token =$bot_token;
+        $this->bot_token = $bot_token;
     }
+
     function message_to_telegram($bot_token, $chat_id, $text, $reply_markup = ''): void
     {
         $ch = curl_init();
         if ($reply_markup == '') {
-            $btn[] = ["text"=>"Узнать погоду", "callback_data"=>'/weather'];
-            $reply_markup = json_encode(["keyboard" => [$btn],  "resize_keyboard" => true]);
+            $btn[] = ["text" => "Узнать погоду", "callback_data" => '/weather'];
+            $reply_markup = json_encode(["keyboard" => [$btn], "resize_keyboard" => true]);
         }
         $ch_post = [
             CURLOPT_URL => 'https://api.telegram.org/bot' . $bot_token . '/sendMessage',
