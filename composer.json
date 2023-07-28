@@ -12,7 +12,8 @@
   "autoload": {
     "psr-4": {
       "weatherBot\\": "app"
-    }
+    },
+    "files": ["MenuMessages.php", "MessagesWeather.php", "UpdatesForDb.php", "CityCoords.php"]
   },
   "require": {
   }

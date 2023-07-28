@@ -2,15 +2,12 @@
 
 namespace weatherBot;
 
-require_once __DIR__."/vendor/autoload.php";
+require_once "vendor/autoload.php";
 //ссылка на бота https://t.me/irych_test_weather_bot
 //токен бота 6033179284:AAE351yAizdTZMnEAa21q9aAzc344hDesW4;
 //$chat_id = 769820969;
 //$urlQuery = "https://api.telegram.org/bot". $token ."/sendMessage?chat_id=". $chat_id ."&text=" . $textMessage;
 use SQLite3;
-include ("UpdatesForDb.php");
-include ("MenuMessages.php");
-include ("MessagesWeather.php");
 
 header('Content-Type: text/html; charset=utf-8');
 
